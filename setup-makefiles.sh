@@ -19,10 +19,50 @@
 set -e
 
 # Required!
-export DEVICE=sakura
-export DEVICE_COMMON=msm8953-common
-export VENDOR=xiaomi
+DEVICE=sakura
+DEVICE_COMMON=msm8953-common
+VENDOR=xiaomi
+DEVICE_BRINGUP_YEAR=2017
 
-export DEVICE_BRINGUP_YEAR=2017
+#./../../$VENDOR/$DEVICE_COMMON/setup-makefiles.sh $@
 
-./../../$VENDOR/$DEVICE_COMMON/setup-makefiles.sh $@
+# Load extract_utils and do some sanity checks
+
+MY_DIR="${BASH_SOURCE%/*}"
+if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
+
+LINEAGE_ROOT="$MY_DIR"/../../..
+
+HELPER="$LINEAGE_ROOT"/vendor/lineage/build/tools/extract_utils.sh
+if [ ! -f "$HELPER" ]; then
+    echo "Unable to find helper script at $HELPER"
+    exit 1
+fi
+. "$HELPER"
+
+# Initialize the helper
+setup_vendor "$DEVICE_COMMON" "$VENDOR" "$LINEAGE_ROOT" true
+
+# Copyright headers and guards
+write_headers "mido tissot"
+
+# The standard common blobs
+write_makefiles "$MY_DIR"/proprietary-files-qc.txt true
+
+# We are done!
+write_footers
+
+if [ -s "$MY_DIR"/../$DEVICE/proprietary-files.txt ]; then
+    # Reinitialize the helper for device
+    INITIAL_COPYRIGHT_YEAR="$DEVICE_BRINGUP_YEAR"
+    setup_vendor "$DEVICE" "$VENDOR" "$LINEAGE_ROOT" false
+
+    # Copyright headers and guards
+    write_headers
+
+    # The standard device blobs
+    write_makefiles "$MY_DIR"/../$DEVICE/proprietary-files.txt true
+
+    # We are done!
+    write_footers
+fi
