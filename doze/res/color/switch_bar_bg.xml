@@ -14,19 +14,7 @@
      limitations under the License.
 -->
 
-<!-- Camera app resources that may need to be customized
-     for different hardware or product builds. -->
-<resources>
-    <!-- Enable support for bokeh mode -->
-    <bool name="support_bokeh_mode">true</bool>
-   
-    <!-- Opens back camera using openLegacy() and forces api v1 -->
-    <bool name="back_camera_open_legacy">false</bool>
-
-    <!-- Opens front camera using openLegacy() and forces api v1 -->
-    <bool name="front_camera_open_legacy">false</bool>
-
-    <!-- Enable support for camera api v2 -->
-    <bool name="support_camera_api_v2">true</bool>
-</resources>
-
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@*android:color/material_grey_600" android:state_activated="false" />
+    <item android:color="?android:attr/colorAccent" android:state_activated="true" />
+</selector>
