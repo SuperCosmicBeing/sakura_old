@@ -1,13 +1,13 @@
 [
     {
         "remote":       "github",
-        "repository":   "mahajant99/device_xiaomi_msm8953-common-sakura",
-        "target_path":  "device/xiaomi/msm8953-common",
+        "repository":   "FrosT2k5/device_xiaomi_sakura",
+        "target_path":  "device/xiaomi/sakura",
         "revision":     "lineage-17.1"
     },
     {
         "remote":       "github",
-        "repository":   "mahajant99/vendor_xiaomi_sakura",
+        "repository":   "FrosT2k5/vendor_xiaomi_sakura",
         "target_path":  "vendor/xiaomi",
         "revision":     "lineage-17.1"
     },
@@ -18,8 +18,7 @@
         "revision":     "lineage-17.1"
     },
     {
-        "repository": "android_packages_resources_devicesettings",
-        "target_path": "packages/resources/devicesettings"
-    }
+   "repository": "android_packages_resources_devicesettings",
+   "target_path": "packages/resources/devicesettings"
+ }
 ]
-
